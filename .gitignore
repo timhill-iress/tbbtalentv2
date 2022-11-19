@@ -315,3 +315,8 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java,gradle,node,macos
 
+## Exclude private keys from GitHub
+**/*.pem
+
+## Exclude built artefacts
+server/bin/
