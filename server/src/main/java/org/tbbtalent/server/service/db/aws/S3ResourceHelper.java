@@ -19,6 +19,7 @@ package org.tbbtalent.server.service.db.aws;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.internal.Mimetypes;
@@ -56,14 +57,21 @@ public class S3ResourceHelper {
     @Autowired
     public S3ResourceHelper(@Value("${aws.credentials.accessKey}") String accessKey,
                             @Value("${aws.credentials.secretKey}") String secretKey,
-                            @Value("${aws.s3.region}") String s3Region) {
+                            @Value("${aws.s3.region}") String s3Region,
+                            @Value("${aws.s3.endpoint}") String s3Endpoint) {
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
-        amazonS3 = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(s3Region).build();
+        AmazonS3ClientBuilder amazonS3Builder = AmazonS3ClientBuilder.standard().
+                withCredentials(new AWSStaticCredentialsProvider(credentials));
+        if( s3Endpoint != null && !s3Endpoint.isEmpty()){
+            amazonS3Builder.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(s3Endpoint, s3Region));
+        }else{
+            amazonS3Builder.withRegion(s3Region);
+        }
+        amazonS3 = amazonS3Builder.build();
         transferManager = TransferManagerBuilder.standard().withS3Client(amazonS3).build();
     }
 
-    public String getS3Bucket() {
+    public String   getS3Bucket() {
         return s3Bucket;
     }
 

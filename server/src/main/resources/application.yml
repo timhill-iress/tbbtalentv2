@@ -177,6 +177,7 @@ aws:
     region: us-east-1
     max-size: 52428800
     upload-folder: temp
+    endpoint: ${AWS_S3_ENDPOINT}
   credentials:
     # For dev this should be set in tbb-secrets
     accessKey: ${AWS_CREDENTIALS_ACCESSKEY:}

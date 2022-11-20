@@ -33,9 +33,12 @@ public class AwsConfiguration {
     @Value("${aws.credentials.secretKey}")
     private String secretKey;
 
+    @Value("${aws.s3.endpoint}")
+    private String endpoint;
+
     @Bean
     public S3ResourceHelper s3ResourceHelper() {
-        return new S3ResourceHelper(accessKey, secretKey, s3Region);
+        return new S3ResourceHelper(accessKey, secretKey, s3Region, endpoint);
     }
 
 

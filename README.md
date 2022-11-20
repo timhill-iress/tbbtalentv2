@@ -192,7 +192,15 @@ Contact TBB if you need access to these
   your start up to set the relevant environment variables.
   For example add "source ~/tbb_secrets.txt" to .bash_profile or .zshenv
   depending on whether you are running bash or zsh.
-
+- To simulate the AWS S3 environment which is used for storing files, such as translations,
+use [localstack](https://localstack.cloud/). 
+  - Install as per instructions.
+  - Start using `localstack start`
+  - Use the [provided script](./scripts/localstack_s3/setup_s3.sh) to make english translations available to the candidate portal.
+  - Set an environment variable in IntelliJ's Run configuration `AWS_S3_ENDPOINT=http://127.0.0.1:4566` or at system level.
+  
+    *Note:It's important to use the ip address rather than localhost so that [PathStyleAccess is enabled](https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/s3/AmazonS3Builder.html#enablePathStyleAccess--)* 
+    
 - Create a new Run Profile for `org.tbbtalent.server.TbbTalentApplication`.
   In the Environment Variables section of Intellij, check the
   "Include system environment variables" checkbox.
