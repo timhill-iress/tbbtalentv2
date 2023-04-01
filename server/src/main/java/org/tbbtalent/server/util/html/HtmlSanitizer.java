@@ -18,15 +18,13 @@ package org.tbbtalent.server.util.html;
 
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
-import org.springframework.stereotype.Service;
 
 /**
  * JSoup https://jsoup.org/ implementation of HTML Sanitization
  *
  * @author Tim Hill
  */
-@Service
-public class JsoupSanitizerImpl implements Sanitizer {
+public class HtmlSanitizer {
     /**
      * Given an untrusted HTML string, remove any tags that might contribute to a cross-site scripting (XSS) attack
      * Ref: https://owasp.org/www-community/attacks/xss/
@@ -34,8 +32,7 @@ public class JsoupSanitizerImpl implements Sanitizer {
      * @param html an untrusted HTML string
      * @return an HTML string with any potentially Cross Site Scripting tags removed
      */
-    @Override
-    public String sanitize(String html) {
+    public static String sanitize(String html) {
         return Jsoup.clean(html, Safelist.relaxed());
     }
 }

@@ -33,33 +33,25 @@ import org.tbbtalent.server.request.work.experience.CreateJobExperienceRequest;
 import org.tbbtalent.server.request.work.experience.UpdateJobExperienceRequest;
 import org.tbbtalent.server.service.db.CandidateJobExperienceService;
 import org.tbbtalent.server.util.dto.DtoBuilder;
-import org.tbbtalent.server.util.html.Sanitizer;
 
 @RestController()
 @RequestMapping("/api/portal/job-experience")
 public class CandidateJobExperiencePortalApi {
 
     private final CandidateJobExperienceService candidateJobExperienceService;
-    private final Sanitizer sanitizer;
-
     @Autowired
-    public CandidateJobExperiencePortalApi(CandidateJobExperienceService candidateJobExperienceService, Sanitizer sanitizer) {
+    public CandidateJobExperiencePortalApi(CandidateJobExperienceService candidateJobExperienceService) {
         this.candidateJobExperienceService = candidateJobExperienceService;
-        this.sanitizer = sanitizer;
     }
 
     @PostMapping()
     public Map<String, Object> createJobExperience(@Valid @RequestBody CreateJobExperienceRequest request) {
-        //Ensure HTML is safe from XSS
-        request.setDescription( sanitizer.sanitize(request.getDescription()));
         CandidateJobExperience candidateJobExperience = this.candidateJobExperienceService.createCandidateJobExperience(request);
         return jobExperienceDto().build(candidateJobExperience);
     }
 
     @PostMapping("update")
     public Map<String, Object> updateJobExperience(@Valid @RequestBody UpdateJobExperienceRequest request) {
-        //Ensure HTML is safe from XSS
-        request.setDescription( sanitizer.sanitize(request.getDescription()));
         CandidateJobExperience candidateJobExperience = this.candidateJobExperienceService.updateCandidateJobExperience(request);
         return jobExperienceDto().build(candidateJobExperience);
     }
