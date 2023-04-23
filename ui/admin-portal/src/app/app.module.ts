@@ -461,6 +461,7 @@ import {
 import {MinSalaryEmployerComponent} from './components/job/intake/min-salary-employer/min-salary-employer.component';
 import {RecruitmentProcessComponent} from './components/job/intake/recruitment-process/recruitment-process.component';
 import { CostCommitEmployerComponent } from './components/job/intake/cost-commit-employer/cost-commit-employer.component';
+import { TailoredCvComponent } from './components/candidates/view/tailored-cv.component';
 
 @NgModule({
   declarations: [
@@ -734,7 +735,8 @@ import { CostCommitEmployerComponent } from './components/job/intake/cost-commit
     VisaPathwaysEmployerComponent,
     MinSalaryEmployerComponent,
     RecruitmentProcessComponent,
-    CostCommitEmployerComponent
+    CostCommitEmployerComponent,
+    TailoredCvComponent
   ],
   imports: [
     BrowserModule,
