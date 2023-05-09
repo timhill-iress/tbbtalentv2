@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ViewJobDescriptionComponent} from './view-job-description.component';
+import {SafePipe} from "../../../../../pipes/safe.pipe";
 
 describe('ViewJobDescriptionComponent', () => {
   let component: ViewJobDescriptionComponent;
@@ -8,7 +9,7 @@ describe('ViewJobDescriptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewJobDescriptionComponent ]
+      declarations: [ ViewJobDescriptionComponent, SafePipe ]
     })
     .compileComponents();
   });

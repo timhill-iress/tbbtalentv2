@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {InputTextComponent} from './input-text.component';
+import { InputTextComponent } from './input-text.component';
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 describe('InputTextComponent', () => {
   let component: InputTextComponent;
@@ -8,7 +9,8 @@ describe('InputTextComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InputTextComponent ]
+      declarations: [InputTextComponent],
+      imports: [NgbActiveModal]
     })
     .compileComponents();
   });

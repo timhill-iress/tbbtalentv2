@@ -17,6 +17,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CandidatesListComponent} from './candidates-list.component';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { of } from 'rxjs';
 
 describe('CandidatesListComponent', () => {
   let component: CandidatesListComponent;
@@ -24,7 +29,22 @@ describe('CandidatesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CandidatesListComponent ]
+      declarations: [CandidatesListComponent],
+      imports: [
+        RouterTestingModule,
+        HttpClientTestingModule,
+        FormsModule,
+        ReactiveFormsModule
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            paramMap: of(convertToParamMap({id:1})),
+            queryParamMap: of(convertToParamMap({ pageSize: 1, pageNumber:1 })),
+          }
+        }
+      ]
     })
     .compileComponents();
   }));
