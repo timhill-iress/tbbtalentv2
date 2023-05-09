@@ -54,5 +54,5 @@
 
 </div>
 
-<p class="text-muted"[innerHTML]="experience?.description"></p>
+<p class="text-muted" [ngClass]="isHtml(experience?.description)?'html':'text'" [innerHTML]="experience?.description"></p>
 
