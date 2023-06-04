@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
-import {JobService} from "../../../../services/job.service";
 import {JobIntakeComponentBase} from "../../../util/intake/JobIntakeComponentBase";
+import {JobService} from "../../../../services/job.service";
 
 @Component({
   selector: 'app-cost-commit-employer',
@@ -16,7 +16,7 @@ export class CostCommitEmployerComponent extends JobIntakeComponentBase implemen
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      costCommitEmployer: [{value: this.jobIntakeData?.costCommitEmployer, disabled: !this.editable}],
+      employerCostCommitment: [{value: this.jobIntakeData?.employerCostCommitment, disabled: !this.editable}],
     });
   }
 
