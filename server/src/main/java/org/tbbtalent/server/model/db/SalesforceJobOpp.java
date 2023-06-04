@@ -99,15 +99,24 @@ public class SalesforceJobOpp extends AbstractAuditableDomainObject<Long> {
     private User contactUser;
 
     /**
-     * Name of country where job is located
+     * todo Remove this field when we moved across to using countryObject everywhere
+     * FROM SALESFORCE: Name of country where job is located
      */
     private String country;
+
+    /**
+     * todo: Once above country field removed, rename countryObject to country
+     * References country object on database (set using the country name above that comes from SF)
+     */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_object_id")
+    private Country countryObject;
 
     /**
      * Description given to job in job intake.
      */
     private String description;
-
+    
     /**
      * Name of employer - maps to Account name on Salesforce
      */
@@ -225,6 +234,29 @@ public class SalesforceJobOpp extends AbstractAuditableDomainObject<Long> {
         joinColumns = @JoinColumn(name = "tc_job_id"),
         inverseJoinColumns = @JoinColumn(name = "saved_search_id"))
     private Set<SavedSearch> suggestedSearches = new HashSet<>();
+    
+    @Nullable
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_opp_intake_id")
+    private JobOppIntake jobOppIntake;
+
+    /**
+     * Salesforce field: hiring commitment of job opportunity
+     * As of 22/5/23 this may change to a text field, stored in database as text but currently a number from SF.
+     */
+    private Long hiringCommitment;
+    
+    /**
+     * Salesforce field: the website of the employer
+     * (On SF exists on Account, but copied to Opportunity and fetched with Opportunity object)
+     */
+    private String employerWebsite;
+    
+    /**                        
+     * Salesforce field: if the employer has hired internationally before 
+     * (On SF exists on Account, but copied to Opportunity and fetched on Opportunity object) 
+     */
+    private String employerHiredInternationally;
 
     public void addStarringUser(User user) {
         starringUsers.add(user);

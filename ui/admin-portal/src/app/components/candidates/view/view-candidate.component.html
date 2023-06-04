@@ -117,6 +117,10 @@
           </div>
         </ng-template>
       </ng-select>
+      <p class="small text-muted mt-1">
+        You can select from lists you created, global lists (like job lists) or lists that you have
+        starred.
+      </p>
     </div>
 
     <div *ngIf="isEditable()" class="ps-2 flex-shrink-0">
@@ -221,6 +225,16 @@
                 [candidate]="candidate"
                 [editable]="isEditable()">
               </app-candidate-task-tab>
+            </ng-template>
+          </ng-container>
+
+          <!-- JOBS -->
+          <ng-container ngbNavItem="Jobs">
+            <a ngbNavLink>Jobs</a>
+            <ng-template ngbNavContent>
+              <app-candidate-jobs-tab
+                [candidate]="candidate">
+              </app-candidate-jobs-tab>
             </ng-template>
           </ng-container>
 

@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program. If not, see https://www.gnu.org/licenses/.
  */
-import {HasId, PagedSearchRequest} from "./base";
+import {OpportunityIds, PagedSearchRequest} from "./base";
 import {SavedList} from "./saved-list";
 import {User} from "./user";
 import {Partner} from "./partner";
@@ -21,34 +21,21 @@ import {SavedSearch} from "./saved-search";
 import {Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {getExternalHref} from "../util/url";
-import {VisaPathway} from "../services/visa-pathway.service";
-import {YesNo} from "./candidate";
+import {JobOppIntake} from "./job-opp-intake";
 
-export interface JobIds extends HasId {
-  sfId: string;
+export interface ShortJob {
+  id: number,
+  name: string;
 }
 
-export interface Job extends JobIds {
-  /**
-   * We need to get fields:
-   * - Website
-   * - Employer Description
-   * - Employer Hiring commitment
-   * - Have they hired from abroad before (not on SF yet)
-   * Should these fields related to the employer sit in own table, an employer table?
-   */
-  // todo get field from SF Account to display in JOI
-  website: string;
-  // todo get field from SF Account to display in JOI
-  employerDescription: string;
-  // todo get field from SF Job Opp to display in JOI
-  employerHiringCommitment: number;
-  // todo get field from SF Job Opp to display in JOI - not currently in SF, do we add?
-  employerPreviousHire: string;
+export interface Job extends OpportunityIds {
+  employerWebsite: string;
+  employerHiredInternationally: boolean;
+  hiringCommitment: string;
   accepting: boolean;
   contactEmail: string;
   contactUser: User;
-  // todo Can we make the country associated with a Job a country object in the DTO so that I can use IDs as opposed to names when getting visa pathways
+  // Note: this country field comes from Salesforce, why it is a string and not a country object.
   country: string;
   createdBy: User;
   createdDate: Date;
@@ -67,27 +54,9 @@ export interface Job extends JobIds {
   suggestedSearches: SavedSearch[];
   updatedBy: User;
   updatedDate: Date;
-}
+  jobOppIntake: JobOppIntake;
 
-export interface JobIntakeData {
-  costCommitEmployer?: string;
-  recruitmentProcess?: string;
-  minSalary?: string;
-  minSalaryEmployer?: YesNo;
-  occupationCode?: string;
-  salary?: string;
-  locationDetails?: string;
-  location?: string;
-  visaPathways?: VisaPathway[];
-  visaPathwaysEmployer?: YesNo;
-  benefits?: string;
-  description?: string;
-  education?: string;
-  experience?: string;
-  skills?: string;
-  title?: string;
 }
-
 export function getJobExternalHref(router: Router, location: Location, job: Job): string {
   return getExternalHref(router, location, ['job', job.id]);
 }
