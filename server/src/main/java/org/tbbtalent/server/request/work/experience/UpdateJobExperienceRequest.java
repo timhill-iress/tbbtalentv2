@@ -16,6 +16,8 @@
 
 package org.tbbtalent.server.request.work.experience;
 
+import org.tbbtalent.server.util.html.HtmlSanitizer;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -91,5 +93,7 @@ public class UpdateJobExperienceRequest {
 
     public String getDescription() { return description; }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = HtmlSanitizer.sanitize(description);
+    }
 }

@@ -39,7 +39,6 @@ import org.tbbtalent.server.util.dto.DtoBuilder;
 public class CandidateJobExperiencePortalApi {
 
     private final CandidateJobExperienceService candidateJobExperienceService;
-
     @Autowired
     public CandidateJobExperiencePortalApi(CandidateJobExperienceService candidateJobExperienceService) {
         this.candidateJobExperienceService = candidateJobExperienceService;

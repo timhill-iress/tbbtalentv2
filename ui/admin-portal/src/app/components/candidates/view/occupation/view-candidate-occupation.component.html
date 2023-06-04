@@ -75,12 +75,9 @@
       <div class="card-body">
 
         <div class="row">
-
           <!-- DESCRIPTION -->
-          <div class="col-12" *ngIf="experience.description">
-            {{experience.description}}
+          <div class="col-12" *ngIf="experience.description" [innerHtml]="experience.description">
           </div>
-
           <!-- COMPANY DETAILS -->
           <div class="col-12">
             <span>{{experience.companyName}}, {{experience.country.name}}</span>

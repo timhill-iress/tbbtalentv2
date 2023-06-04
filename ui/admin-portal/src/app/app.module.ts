@@ -687,6 +687,7 @@ import {
 import {
   ViewCandidateJobsComponent
 } from './components/candidates/view/jobs/view-candidate-jobs/view-candidate-jobs.component';
+import { TailoredCvComponent } from './components/candidates/view/tailored-cv.component';
 
 @NgModule({
   declarations: [
@@ -960,7 +961,8 @@ import {
     JobLanguageComponent,
     VisaEligibilityAssessmentComponent,
     CandidateJobsTabComponent,
-    ViewCandidateJobsComponent
+    ViewCandidateJobsComponent,
+    TailoredCvComponent
   ],
   imports: [
     BrowserModule,
